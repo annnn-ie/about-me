@@ -1,0 +1,84 @@
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: visible;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(168, 162, 158, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(168, 162, 158, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.floating-card-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  padding: clamp(40px, 8vw, 300px);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.instructions {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 1rem 2rem;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.instructions p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .instructions {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    font-size: 0.8rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 1rem;
+  }
+  
+  .floating-card-container {
+    padding: clamp(20px, 4vw, 60px);
+  }
+}

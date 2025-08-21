@@ -1,0 +1,231 @@
+.business-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Funnel Sans', sans-serif;
+    overflow: visible;
+    position: relative;
+    box-sizing: border-box;
+    padding: clamp(20px, 4vw, 40px);
+}
+
+.business-card-front {
+    background: #fafaf9; /* stone-50 */
+    color: #292524; /* stone-800 */
+    justify-content: space-between;
+    filter: url(#filter0_ddddg_166_4226);
+}
+
+.business-card-back {
+    background: #0c0a09; /* stone-950 */
+    color: #fafaf9; /* stone-50 */
+    justify-content: space-between;
+    align-items: center;
+    filter: url(#filter0_ddddg_166_4226);
+}
+
+/* Front side styles */
+.card-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.name {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.56px;
+    margin: 0;
+    width: 100%;
+    color: #292524; /* stone-800 */
+    position: relative;
+}
+
+.title, .company {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    margin: 0;
+    width: 100%;
+    color: #292524; /* stone-800 */
+}
+
+.company-link {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    color: #292524; /* stone-800 */
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.company-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #78716c; /* stone-500 */
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.company-link:hover::after {
+    width: 100%;
+}
+
+.company-link:hover {
+    /* Removed color change - keeping original text color */
+}
+
+.company-link:active {
+    transform: translateY(0);
+}
+
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.socials {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.socials span {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #292524; /* stone-800 */
+}
+
+.social-link {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #292524; /* stone-800 */
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #78716c; /* stone-500 */
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.social-link:hover::after {
+    width: 100%;
+}
+
+.social-link:hover {
+    /* Removed color change - keeping original text color */
+}
+
+.social-link:active {
+    transform: translateY(0);
+}
+
+.location {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    margin: 0;
+    width: 100%;
+    color: #292524; /* stone-800 */
+}
+
+/* Back side styles */
+.back-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    flex-shrink: 0;
+    margin-bottom: 32px; /* Add spacing between symbol and text */
+}
+
+.symbol-svg {
+    width: clamp(80px, 15vw, 113px);
+    height: clamp(34px, 6vw, 48px);
+    filter: brightness(0) invert(1); /* Makes the SVG white */
+}
+
+.back-tagline {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    color: #fafaf9; /* stone-50 */
+    text-align: center;
+    width: min-content;
+    margin: 0;
+    min-width: 100%;
+}
+
+.back-tagline p {
+    margin: 0;
+    display: block;
+}
+
+.back-tagline p:first-child {
+    margin-bottom: 0;
+}
+
+/* Scribble effect responsive adjustments */
+@media (max-width: 600px) {
+    .name img {
+        max-width: 80px !important;
+        top: -4px !important;
+        left: -1px !important;
+    }
+}
