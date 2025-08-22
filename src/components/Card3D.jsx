@@ -16,8 +16,7 @@ const resetSpringValues = {
 /**
  * 3D Flip Card Component with Tilt Effect, Random Rotation, and Drag Functionality
  */
-export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
-    const [isFlipped, setIsFlipped] = useState(false);
+export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: externalIsFlipped, ...props }) {
     const [isHovered, setIsHovered] = useState(false);
     const [randomRotation, setRandomRotation] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
@@ -43,8 +42,7 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
         const isLink = e.target.closest('a');
         
         if (!isDragging && !isLink) {
-            const newFlipState = !isFlipped;
-            setIsFlipped(newFlipState);
+            const newFlipState = !externalIsFlipped;
             onFlipChange?.(newFlipState);
         }
     };
@@ -92,6 +90,9 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
         setIsDragging(false);
         scale.set(1);
         setShouldReset(true);
+        // Reset position to center
+        x.set(0);
+        y.set(0);
         // Reset tilt
         rotateX.set(0);
         rotateY.set(0);
@@ -113,8 +114,9 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
             onClick={handleClick}
             drag
             dragConstraints={{ left: -200, right: 200, top: -150, bottom: 150 }}
-            dragElastic={0.15}
+            dragElastic={0}
             dragMomentum={false}
+            dragSnapToOrigin={true}
             dragTransition={{ 
                 bounceStiffness: 400, 
                 bounceDamping: 40,
@@ -124,7 +126,7 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             style={{
-                perspective: "1200px",
+                perspective: "1100px",
                 transformStyle: "preserve-3d",
                 width: "min(520px, 90vw)",
                 height: "min(360px, calc(90vw * 9/13))",
@@ -135,12 +137,49 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
                 padding: "clamp(20px, 4vw, 40px)",
                 overflow: "visible",
             }}
+            initial={{ 
+                y: -1000, // Start from above the screen
+                opacity: 0,
+                scale: 0.8,
+                rotateY: -2 // Start with a slight left tilt
+            }}
             animate={{ 
-                x: shouldReset ? 0 : undefined,
-                y: shouldReset ? 0 : undefined,
+                y: 0, // Slide to center position
+                opacity: 1,
+                scale: 1,
+                rotateY: [2, -2, 2, -2, 0], // Wiggle effect during slide, then settle to 0
                 rotate: isHovered && !isDragging ? 0 : randomRotation 
             }}
-            transition={resetSpringValues}
+            transition={{
+                y: {
+                    type: "spring",
+                    damping: 25,
+                    stiffness: 100,
+                    mass: 1.2
+                },
+                x: {
+                    type: "spring",
+                    damping: 30,
+                    stiffness: 150,
+                    mass: 1
+                },
+                rotateY: {
+                    duration: 1.2, // Match the slide duration
+                    times: [0, 0.25, 0.5, 0.75, 1], // Wiggle timing
+                    ease: "easeInOut"
+                },
+                opacity: {
+                    duration: 0.6,
+                    ease: "easeOut"
+                },
+                scale: {
+                    type: "spring",
+                    damping: 20,
+                    stiffness: 120,
+                    mass: 1
+                },
+                ...resetSpringValues
+            }}
             {...props}
         >
             <motion.div
@@ -160,10 +199,10 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
                     style={{
                         width: "100%",
                         height: "100%",
-                        zIndex: isFlipped ? 0 : 1,
+                        zIndex: externalIsFlipped ? 0 : 1,
                         backfaceVisibility: "hidden",
                         position: "absolute",
-                        transform: `rotateY(${isFlipped ? -180 : 0}deg)`,
+                        transform: `rotateY(${externalIsFlipped ? -180 : 0}deg)`,
                         transition: "transform 0.6s ease-in-out",
                     }}
                 >
@@ -175,10 +214,10 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
                     style={{
                         width: "100%",
                         height: "100%",
-                        zIndex: isFlipped ? 1 : 0,
+                        zIndex: externalIsFlipped ? 1 : 0,
                         backfaceVisibility: "hidden",
                         position: "absolute",
-                        transform: `rotateY(${isFlipped ? 0 : 180}deg)`,
+                        transform: `rotateY(${externalIsFlipped ? 0 : 180}deg)`,
                         transition: "transform 0.6s ease-in-out",
                     }}
                 >

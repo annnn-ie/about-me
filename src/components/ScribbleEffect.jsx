@@ -4,6 +4,7 @@ import './ScribbleEffect.css';
 const ScribbleEffect = ({ children, cardFlipped }) => {
     const [selectedScribble, setSelectedScribble] = useState(null);
     const [svgContent, setSvgContent] = useState(null);
+    const [isSmile, setIsSmile] = useState(false);
     
     // Array of scribble SVG paths
     const scribblePaths = [
@@ -12,7 +13,8 @@ const ScribbleEffect = ({ children, cardFlipped }) => {
         '/scribbles/path-3.svg',
         '/scribbles/path-4.svg',
         '/scribbles/path-5.svg',
-        '/scribbles/path-6.svg'
+        '/scribbles/path-6.svg',
+        '/scribbles/smile.svg'
     ];
 
     const loadRandomScribble = () => {
@@ -21,30 +23,31 @@ const ScribbleEffect = ({ children, cardFlipped }) => {
         const selectedPath = scribblePaths[randomIndex];
         setSelectedScribble(selectedPath);
         
+        // Check if it's the smile
+        const isSmileScribble = selectedPath.includes('smile.svg');
+        setIsSmile(isSmileScribble);
+        
         // Fetch and process the SVG content for animation
         fetch(selectedPath)
             .then(response => response.text())
             .then(svgText => {
-                // Convert fill to stroke for animation and ensure proper structure
-                const processedSvg = svgText
-                    .replace(/fill="#1500FF"/g, 'fill="none" stroke="#1500FF" stroke-width="2"')
-                    .replace(/<path /g, '<path class="animated-path" ')
-                    .replace(/<g /g, '<g class="scribble-group" ');
-                setSvgContent(processedSvg);
+                let processedSvg;
                 
-                // Calculate path length after the SVG is rendered
-                setTimeout(() => {
-                    const paths = document.querySelectorAll('.animated-path');
-                    paths.forEach(path => {
-                        const length = path.getTotalLength();
-                        // Use a single dash that's the full length of the path
-                        path.style.strokeDasharray = length;
-                        path.style.strokeDashoffset = length;
-                        // Ensure smooth line caps
-                        path.style.strokeLinecap = 'round';
-                        path.style.strokeLinejoin = 'round';
-                    });
-                }, 100);
+                if (isSmileScribble) {
+                    // For smile.svg, ensure it has proper structure for animation
+                    processedSvg = svgText
+                        .replace(/<path /g, '<path class="animated-path" ')
+                        .replace(/<circle /g, '<circle class="animated-path" ')
+                        .replace(/<g /g, '<g class="scribble-group" ');
+                } else {
+                    // For regular scribbles, convert fill to stroke for animation
+                    processedSvg = svgText
+                        .replace(/fill="#1500FF"/g, 'fill="none" stroke="#1500FF" stroke-width="2"')
+                        .replace(/<path /g, '<path class="animated-path" ')
+                        .replace(/<g /g, '<g class="scribble-group" ');
+                }
+                
+                setSvgContent(processedSvg);
             })
             .catch(error => {
                 console.error('Error loading SVG:', error);
@@ -75,11 +78,11 @@ const ScribbleEffect = ({ children, cardFlipped }) => {
                 className="scribble-container"
                 style={{
                     position: 'absolute',
-                    top: '-2px',
-                    left: '-10px',
+                    top: isSmile ? '-15px' : '-2px',
+                    left: isSmile ? '-75px' : '-10px',
                     width: '100%',
                     height: 'auto',
-                    maxWidth: '120px',
+                    maxWidth: isSmile ? '80px' : '120px',
                     pointerEvents: 'none',
                     zIndex: 1
                 }}

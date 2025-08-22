@@ -93,10 +93,6 @@
     width: 100%;
 }
 
-.company-link:hover {
-    /* Removed color change - keeping original text color */
-}
-
 .company-link:active {
     transform: translateY(0);
 }
@@ -162,9 +158,7 @@
     width: 100%;
 }
 
-.social-link:hover {
-    /* Removed color change - keeping original text color */
-}
+/* Removed color change - keeping original text color */
 
 .social-link:active {
     transform: translateY(0);

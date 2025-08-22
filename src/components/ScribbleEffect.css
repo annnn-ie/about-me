@@ -3,9 +3,55 @@
 }
 
 .scribble-container .animated-path {
-    animation: draw 1.5s cubic-bezier(1, -0.4, 0.35, 0.95) forwards;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 1.5s cubic-bezier(0.62, 0.05, 0.795, 0.035) forwards 1s;
     vector-effect: non-scaling-stroke;
-    opacity: 0.85;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.80;
+}
+
+/* Special handling for smile.svg elements that use stroke */
+.scribble-container .animated-path[stroke] {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 1.5s cubic-bezier(0.62, 0.05, 0.795, 0.035) forwards 1s;
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.80;
+}
+
+/* Handle circle elements in smile.svg - eyes appear last */
+.scribble-container .animated-path[fill] {
+    opacity: 0;
+    animation: fadeIn 0.3s cubic-bezier(0.62, 0.05, 0.795, 0.035) forwards 2.5s;
+}
+
+/* Sequential animation for smile elements */
+.scribble-container .animated-path[stroke]:nth-of-type(1) {
+    /* Outer circle - appears first */
+    animation-delay: 1s;
+}
+
+.scribble-container .animated-path[stroke]:nth-of-type(2) {
+    /* Smile path - appears second */
+    animation-delay: 2s;
+}
+
+.scribble-container .animated-path[stroke]:nth-of-type(3) {
+    /* Eyes - appear last */
+    animation-delay: 3s;
+}
+
+/* Staggered eye animation - first eye appears at 2.5s, second eye at 2.8s */
+.scribble-container .animated-path[fill]:nth-of-type(1) {
+    animation-delay: 2.5s;
+}
+
+.scribble-container .animated-path[fill]:nth-of-type(2) {
+    animation-delay: 2.8s;
 }
 
 @keyframes draw {
@@ -14,9 +60,49 @@
     }
 }
 
+@keyframes fadeIn {
+    to {
+        opacity: 0.80;
+    }
+}
+
 /* Responsive adjustments for the animation */
 @media (max-width: 600px) {
     .scribble-container .animated-path {
-        animation: draw 1.2s cubic-bezier(1, -0.4, 0.35, 0.95) forwards;
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: draw 1.2s cubic-bezier(0.62, 0.05, 0.795, 0.035) forwards 1s;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    
+    .scribble-container .animated-path[stroke] {
+        animation: draw 1.2s cubic-bezier(0.62, 0.05, 0.795, 0.035) forwards 1s;
+    }
+    
+    .scribble-container .animated-path[fill] {
+        animation: fadeIn 0.3s cubic-bezier(0.62, 0.05, 0.795, 0.035) forwards 2.2s;
+    }
+    
+    /* Sequential animation for smile elements on mobile */
+    .scribble-container .animated-path[stroke]:nth-of-type(1) {
+        animation-delay: 1s;
+    }
+    
+    .scribble-container .animated-path[stroke]:nth-of-type(2) {
+        animation-delay: 1.8s;
+    }
+    
+    .scribble-container .animated-path[stroke]:nth-of-type(3) {
+        animation-delay: 2.4s;
+    }
+    
+    /* Staggered eye animation on mobile - first eye at 2.2s, second eye at 2.5s */
+    .scribble-container .animated-path[fill]:nth-of-type(1) {
+        animation-delay: 2.2s;
+    }
+    
+    .scribble-container .animated-path[fill]:nth-of-type(2) {
+        animation-delay: 2.5s;
     }
 }
