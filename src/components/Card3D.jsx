@@ -63,6 +63,24 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
         rotateY.set(rotationY);
     }
 
+    function handleTouch(e) {
+        if (!ref.current || isDragging) return;
+        
+        // Use the first touch point for tilt effect
+        const touch = e.touches[0];
+        if (!touch) return;
+
+        const rect = ref.current.getBoundingClientRect();
+        const offsetX = touch.clientX - rect.left - rect.width / 2;
+        const offsetY = touch.clientY - rect.top - rect.height / 2;
+
+        const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude * 0.5; // Reduced amplitude for touch
+        const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude * 0.5;
+
+        rotateX.set(rotationX);
+        rotateY.set(rotationY);
+    }
+
     function handleMouseEnter() {
         if (!isDragging) {
             setIsHovered(true);
@@ -110,29 +128,37 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
             onMouseMove={handleMouse}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onTouchMove={handleTouch}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => {
+                setIsHovered(false);
+                rotateX.set(0);
+                rotateY.set(0);
+                setRandomRotation(Math.random() * 8 - 4);
+            }}
             onClick={handleClick}
             drag
-            dragConstraints={{ left: -200, right: 200, top: -150, bottom: 150 }}
-            dragElastic={0.15}
+            dragConstraints={{ left: -100, right: 100, top: -75, bottom: 75 }}
+            dragElastic={0.2}
             dragMomentum={false}
             dragTransition={{ 
-                bounceStiffness: 400, 
-                bounceDamping: 40,
-                power: 0.8,
-                timeConstant: 200
+                bounceStiffness: 300, 
+                bounceDamping: 30,
+                power: 0.6,
+                timeConstant: 150
             }}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             style={{
                 perspective: "1200px",
                 transformStyle: "preserve-3d",
-                width: "min(520px, 90vw)",
-                height: "min(360px, calc(90vw * 9/13))",
+                width: "min(520px, calc(100vw - 40px))",
+                height: "min(360px, calc((100vw - 40px) * 9/13))",
                 maxWidth: "520px",
                 maxHeight: "360px",
                 cursor: isDragging ? "grabbing" : "pointer",
                 filter: "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.08))",
-                padding: "clamp(20px, 4vw, 40px)",
+                padding: "clamp(15px, 3vw, 30px)",
                 overflow: "visible",
             }}
             animate={{ 
