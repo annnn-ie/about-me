@@ -221,6 +221,68 @@
     margin-bottom: 0;
 }
 
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .business-card {
+        padding: clamp(15px, 3vw, 25px);
+    }
+    
+    .name {
+        font-size: clamp(18px, 4.5vw, 24px);
+    }
+    
+    .title, .company {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    .company-link {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    .social-link {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    .socials span {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    .location {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    .back-tagline {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+    
+    .symbol-svg {
+        width: clamp(60px, 12vw, 90px);
+        height: clamp(26px, 5vw, 38px);
+    }
+}
+
+@media (max-width: 480px) {
+    .business-card {
+        padding: clamp(10px, 2.5vw, 20px);
+    }
+    
+    .card-top {
+        gap: 6px;
+    }
+    
+    .card-bottom {
+        gap: 6px;
+    }
+    
+    .socials {
+        gap: 8px;
+    }
+    
+    .back-symbol {
+        margin-bottom: 20px;
+    }
+}
+
 /* Scribble effect responsive adjustments */
 @media (max-width: 600px) {
     .name img {

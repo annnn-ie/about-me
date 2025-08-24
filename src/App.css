@@ -33,7 +33,7 @@
   justify-content: center;
   width: 100%;
   height: 100vh;
-  padding: clamp(40px, 8vw, 300px);
+  padding: clamp(20px, 4vw, 80px);
   box-sizing: border-box;
   overflow: visible;
 }
@@ -63,6 +63,15 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .floating-card-container {
+    padding: clamp(10px, 2vw, 20px);
+    height: 100svh; /* Use small viewport height for mobile browsers */
+  }
+  
   .instructions {
     bottom: 1rem;
     left: 1rem;
@@ -75,10 +84,11 @@
 
 @media (max-width: 480px) {
   .app {
-    padding: 1rem;
+    padding: 5px;
   }
   
   .floating-card-container {
-    padding: clamp(20px, 4vw, 60px);
+    padding: clamp(5px, 1vw, 10px);
+    height: 100svh;
   }
 }
