@@ -35,6 +35,11 @@
           <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.01 0"/>
           <feBlend mode="normal" in2="effect3_dropShadow_166_4226" result="effect4_dropShadow_166_4226"/>
           <feBlend mode="normal" in="SourceGraphic" in2="effect4_dropShadow_166_4226" result="shape"/>
+          <feTurbulence type="fractalNoise" baseFrequency="1.9 1.9" numOctaves="3" seed="42"/>
+          <feDisplacementMap in="shape" scale="2" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%"/>
+          <feMerge result="effect5_texture_166_4226">
+            <feMergeNode in="displacedImage"/>
+          </feMerge>
         </filter>
       </defs>
     </svg>
