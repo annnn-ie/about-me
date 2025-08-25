@@ -11,7 +11,7 @@ export function BusinessCard({ isFlipped }) {
                 </div>
                 <div className="title">Product Designer. Educator.</div>
                 <div className="company">
-                <span>@</span>
+                <span>@ </span>
                     <a 
                         href="https://www.dna.inc/" 
                         className="company-link"
