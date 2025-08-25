@@ -19,7 +19,7 @@
 }
 
 html {
-  background: linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%);
+  background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
   min-height: 100vh;
   overflow: hidden;
 }
@@ -30,14 +30,14 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow: hidden;
-  background: linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%);
+  background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background: linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%);
+  background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
 }
 
 h1, h2, h3, h4, h5, h6 {

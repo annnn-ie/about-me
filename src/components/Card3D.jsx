@@ -92,7 +92,7 @@ export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: ext
     const scale = useSpring(1, springValues);
 
     // Simplify effects for mobile devices
-    const rotateAmplitude = (isMobile || isMobileDevice) ? 3 : 14; // Much smaller rotation on mobile
+    const rotateAmplitude = (isMobile || isMobileDevice) ? 2 : 8; // Subtle rotation for both mobile and desktop
     const scaleOnHover = (isMobile || isMobileDevice) ? 1.005 : 1.02; // Minimal hover scale on mobile
 
     const handleClick = (e) => {
@@ -247,10 +247,8 @@ export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: ext
             animate={animateProps}
             transition={{
                 y: {
-                    type: "spring",
-                    damping: (isMobile || isMobileDevice) ? 30 : 25,
-                    stiffness: (isMobile || isMobileDevice) ? 120 : 100,
-                    mass: (isMobile || isMobileDevice) ? 1 : 1.2
+                    ease: [0.785, 0.135, 0.15, 0.86],
+                    duration: (isMobile || isMobileDevice) ? 0.8 : 1.2
                 },
                 x: {
                     type: "spring",

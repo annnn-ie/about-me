@@ -14,15 +14,15 @@
 }
 
 .business-card-front {
-    background: #fafaf9; /* stone-50 */
-    color: #292524; /* stone-800 */
+    background: #fafafa; /* neutral-50 */
+    color: #262626; /* neutral-800 */
     justify-content: space-between;
     filter: url(#filter0_ddddg_166_4226);
 }
 
 .business-card-back {
-    background: #0c0a09; /* stone-950 */
-    color: #fafaf9; /* stone-50 */
+    background: #0a0a0a; /* neutral-950 */
+    color: #fafafa; /* neutral-50 */
     justify-content: space-between;
     align-items: center;
     filter: url(#filter0_ddddg_166_4226);
@@ -49,7 +49,7 @@
     letter-spacing: -0.56px;
     margin: 0;
     width: 100%;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
     position: relative;
 }
 
@@ -62,7 +62,7 @@
     text-transform: uppercase;
     margin: 0;
     width: 100%;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
 }
 
 .company-link {
@@ -72,7 +72,7 @@
     line-height: 1;
     letter-spacing: -0.36px;
     text-transform: uppercase;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
     text-decoration: none;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -86,7 +86,7 @@
     line-height: 1;
     letter-spacing: -0.36px;
     text-transform: uppercase;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
 }
 
 .company-link::after {
@@ -96,7 +96,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #78716c; /* stone-500 */
+    background-color: #737373; /* neutral-500 */
     transition: width 0.3s ease;
     transform: translateX(-50%);
 }
@@ -136,7 +136,7 @@
     letter-spacing: -0.36px;
     text-transform: uppercase;
     white-space: nowrap;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
 }
 
 .social-link {
@@ -147,7 +147,7 @@
     letter-spacing: -0.36px;
     text-transform: uppercase;
     white-space: nowrap;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
     text-decoration: none;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -161,7 +161,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #78716c; /* stone-500 */
+    background-color: #737373; /* neutral-500 */
     transition: width 0.3s ease;
     transform: translateX(-50%);
 }
@@ -185,7 +185,7 @@
     text-transform: uppercase;
     margin: 0;
     width: 100%;
-    color: #292524; /* stone-800 */
+    color: #262626; /* neutral-800 */
 }
 
 /* Back side styles */
@@ -211,7 +211,7 @@
     line-height: 1;
     letter-spacing: -0.36px;
     text-transform: uppercase;
-    color: #fafaf9; /* stone-50 */
+    color: #fafafa; /* neutral-50 */
     text-align: center;
     width: min-content;
     margin: 0;
@@ -240,13 +240,13 @@
 
 /* Ensure mobile card content is visible */
 .business-card-mobile.business-card-front {
-    background: #fafaf9 !important;
-    color: #292524 !important;
+    background: #fafafa !important;
+    color: #262626 !important;
 }
 
 .business-card-mobile.business-card-back {
-    background: #0c0a09 !important;
-    color: #fafaf9 !important;
+    background: #0a0a0a !important;
+    color: #fafafa !important;
     box-shadow: 0 12.768px 3.438px 0px rgba(0,0,0,0), 0 8.348px 3.438px 0px rgba(0,0,0,0.01), 0 4.42px 2.946px 0px rgba(0,0,0,0.05), 0 1.964px 1.964px 0px rgba(0,0,0,0.09), 0 0.491px 0.982px 0px rgba(0,0,0,0.1) !important;
 }
 
