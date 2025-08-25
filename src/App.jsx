@@ -5,7 +5,29 @@ import './App.css'
 
 function App() {
   const [isFlipped, setIsFlipped] = useState(true); // Start with backside
-  const { frontContent, backContent } = BusinessCard({ isFlipped })
+  const [breakpoint, setBreakpoint] = useState('default');
+  
+  // Detect mobile breakpoint
+  useEffect(() => {
+    const checkBreakpoint = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        setBreakpoint('xs');
+      } else {
+        setBreakpoint('default');
+      }
+    };
+    
+    // Check on mount
+    checkBreakpoint();
+    
+    // Check on resize
+    window.addEventListener('resize', checkBreakpoint);
+    
+    return () => window.removeEventListener('resize', checkBreakpoint);
+  }, []);
+  
+  const { frontContent, backContent } = BusinessCard({ isFlipped, breakpoint })
 
   // Flip to front side when component mounts (after card enters screen)
   useEffect(() => {
@@ -24,6 +46,7 @@ function App() {
           backContent={backContent}
           onFlipChange={setIsFlipped}
           isFlipped={isFlipped}
+          breakpoint={breakpoint}
         />
       </div>
       {/* <div className="instructions">
