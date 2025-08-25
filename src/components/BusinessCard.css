@@ -79,6 +79,16 @@
     position: relative;
 }
 
+.company-text {
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.36px;
+    text-transform: uppercase;
+    color: #292524; /* stone-800 */
+}
+
 .company-link::after {
     content: '';
     position: absolute;
@@ -258,6 +268,12 @@
 }
 
 .business-card-mobile .company-link {
+    font-size: 9px !important; /* Match Figma body_xs size */
+    letter-spacing: -0.18px !important;
+    line-height: 1 !important;
+}
+
+.business-card-mobile .company-text {
     font-size: 9px !important; /* Match Figma body_xs size */
     letter-spacing: -0.18px !important;
     line-height: 1 !important;

@@ -1,19 +1,18 @@
 .app {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e7e5e4 0%, #d6d3d1 100%);
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .app::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -23,6 +22,7 @@
     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(168, 162, 158, 0.2) 0%, transparent 50%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .floating-card-container {
@@ -35,7 +35,7 @@
   height: 100vh;
   padding: clamp(40px, 8vw, 300px);
   box-sizing: border-box;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .instructions {

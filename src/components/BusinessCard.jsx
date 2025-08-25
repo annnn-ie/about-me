@@ -11,14 +11,15 @@ export function BusinessCard({ isFlipped }) {
                 </div>
                 <div className="title">Product Designer. Educator.</div>
                 <div className="company">
+                <span>@</span>
                     <a 
-                        href="https://dna.inc" 
+                        href="https://www.dna.inc/" 
                         className="company-link"
                         target="_blank" 
                         rel="noopener noreferrer"
                         title="Visit DNA.inc website"
                     >
-                        @DNA.inc
+                        DNA.inc
                     </a>
                     <span> | </span>
                     <a 
@@ -28,7 +29,7 @@ export function BusinessCard({ isFlipped }) {
                         rel="noopener noreferrer"
                         title="Visit Barreira A+D website"
                     >
-                        Barreira a+D
+                        Barreira A+D
                     </a>
                 </div>
             </div>

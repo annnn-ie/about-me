@@ -295,7 +295,7 @@ export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: ext
                         width: "100%",
                         height: "100%",
                         zIndex: externalIsFlipped ? 0 : 1,
-                        backfaceVisibility: (isMobile || isMobileDevice) ? "visible" : "hidden", // Show backface on mobile
+                        backfaceVisibility: "hidden", // Always hidden to prevent flash during breakpoint changes
                         position: "absolute",
                         transform: (isMobile || isMobileDevice) ? 
                             `translateX(${externalIsFlipped ? -100 : 0}%)` : // Simple slide on mobile
@@ -313,7 +313,7 @@ export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: ext
                         width: "100%",
                         height: "100%",
                         zIndex: externalIsFlipped ? 1 : 0,
-                        backfaceVisibility: (isMobile || isMobileDevice) ? "visible" : "hidden", // Show backface on mobile
+                        backfaceVisibility: "hidden", // Always hidden to prevent flash during breakpoint changes
                         position: "absolute",
                         transform: (isMobile || isMobileDevice) ? 
                             `translateX(${externalIsFlipped ? 0 : 100}%)` : // Simple slide on mobile
