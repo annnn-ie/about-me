@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Card3D } from './components/Card3D'
+import { ReceiptCard } from './components/ReceiptCard'
 import { BusinessCard } from './components/BusinessCard'
-import { ExperienceTicket } from './components/ExperienceTicket'
+import { Receipt } from './components/Receipt'
 import './App.css'
 
 function App() {
   const [isFlipped, setIsFlipped] = useState(true); // Start with backside
   const [breakpoint, setBreakpoint] = useState('default');
-  const [viewMode, setViewMode] = useState('card'); // 'card' or 'ticket'
+  const [showReceipt, setShowReceipt] = useState(false); // Toggle between card and receipt
   
   // Detect mobile breakpoint
   useEffect(() => {
@@ -25,11 +26,11 @@ function App() {
     
     // Check on resize
     window.addEventListener('resize', checkBreakpoint);
+    
     return () => window.removeEventListener('resize', checkBreakpoint);
   }, []);
   
   const { frontContent, backContent } = BusinessCard({ isFlipped, breakpoint })
-  const ticketContent = <ExperienceTicket isFlipped={isFlipped} />
 
   // Flip to front side when component mounts (after card enters screen)
   useEffect(() => {
@@ -40,50 +41,46 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const toggleViewMode = () => {
-    setViewMode(prevMode => prevMode === 'card' ? 'ticket' : 'card');
+  const handleToggleView = () => {
+    setShowReceipt(!showReceipt);
     // Reset flip state when switching views
-    setIsFlipped(false);
-  };
-
-  const getCurrentContent = () => {
-    if (viewMode === 'ticket') {
-      return {
-        frontContent: ticketContent,
-        backContent: ticketContent // Ticket doesn't have a back side
-      };
+    if (!showReceipt) {
+      setIsFlipped(false);
     }
-    return { frontContent, backContent };
   };
-
-  const { frontContent: currentFront, backContent: currentBack } = getCurrentContent();
 
   return (
     <div className="app">
-      <div className="view-toggle">
+      <div className="floating-card-container">
+        {showReceipt ? (
+          <ReceiptCard 
+            content={<Receipt />}
+            breakpoint={breakpoint}
+          />
+        ) : (
+          <Card3D 
+            frontContent={frontContent}
+            backContent={backContent}
+            onFlipChange={setIsFlipped}
+            isFlipped={isFlipped}
+            breakpoint={breakpoint}
+          />
+        )}
+      </div>
+      
+      <div className="toggle-button-container">
         <button 
-          onClick={toggleViewMode}
-          className={`toggle-btn ${viewMode === 'card' ? 'active' : ''}`}
+          className="toggle-button"
+          onClick={handleToggleView}
+          aria-label={showReceipt ? "Switch to Business Card" : "Switch to Receipt"}
         >
-          Business Card
-        </button>
-        <button 
-          onClick={toggleViewMode}
-          className={`toggle-btn ${viewMode === 'ticket' ? 'active' : ''}`}
-        >
-          Experience Ticket
+          {showReceipt ? "View Card" : "View Receipt"}
         </button>
       </div>
       
-      <div className="floating-card-container">
-        <Card3D 
-          frontContent={currentFront}
-          backContent={currentBack}
-          onFlipChange={setIsFlipped}
-          isFlipped={isFlipped}
-          breakpoint={breakpoint}
-        />
-      </div>
+      {/* <div className="instructions">
+        <p>Click to flip • Drag to move</p>
+      </div> */}
     </div>
   )
 }

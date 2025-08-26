@@ -1,3 +1,6 @@
+/* Import Departure Mono font for receipt component */
+@import url('https://fonts.googleapis.com/css2?family=Departure+Mono:wght@400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -51,6 +54,13 @@ p {
 
 /* Disable text selection for better interaction */
 .business-card {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+/* Disable text selection for receipt component */
+.receipt {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
