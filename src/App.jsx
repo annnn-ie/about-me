@@ -25,11 +25,11 @@ function App() {
     
     // Check on resize
     window.addEventListener('resize', checkBreakpoint);
-    
     return () => window.removeEventListener('resize', checkBreakpoint);
   }, []);
   
   const { frontContent, backContent } = BusinessCard({ isFlipped, breakpoint })
+  const ticketContent = <ExperienceTicket isFlipped={isFlipped} />
 
   // Flip to front side when component mounts (after card enters screen)
   useEffect(() => {
@@ -41,24 +41,22 @@ function App() {
   }, []);
 
   const toggleViewMode = () => {
-    setViewMode(viewMode === 'card' ? 'ticket' : 'card');
+    setViewMode(prevMode => prevMode === 'card' ? 'ticket' : 'card');
+    // Reset flip state when switching views
+    setIsFlipped(false);
   };
 
-  const renderContent = () => {
+  const getCurrentContent = () => {
     if (viewMode === 'ticket') {
-      return <ExperienceTicket />;
+      return {
+        frontContent: ticketContent,
+        backContent: ticketContent // Ticket doesn't have a back side
+      };
     }
-    
-    return (
-      <Card3D 
-        frontContent={frontContent}
-        backContent={backContent}
-        onFlipChange={setIsFlipped}
-        isFlipped={isFlipped}
-        breakpoint={breakpoint}
-      />
-    );
+    return { frontContent, backContent };
   };
+
+  const { frontContent: currentFront, backContent: currentBack } = getCurrentContent();
 
   return (
     <div className="app">
@@ -78,12 +76,14 @@ function App() {
       </div>
       
       <div className="floating-card-container">
-        {renderContent()}
+        <Card3D 
+          frontContent={currentFront}
+          backContent={currentBack}
+          onFlipChange={setIsFlipped}
+          isFlipped={isFlipped}
+          breakpoint={breakpoint}
+        />
       </div>
-      
-      {/* <div className="instructions">
-        <p>Click to flip • Drag to move</p>
-      </div> */}
     </div>
   )
 }

@@ -1,60 +1,106 @@
-/* Exact Figma design classes */
-.content-stretch {
-  align-content: stretch;
+.experience-ticket {
+    background: linear-gradient(to bottom, #e5e5e5, #d4d4d4);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Departure Mono', 'Courier New', monospace;
+    color: #171717;
 }
 
-.basis-0 {
-  flex-basis: 0;
+.ticket-content {
+    background: #fafafa;
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.grow {
-  flex-grow: 1;
+.title {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
-.leading-none {
-  line-height: 1;
+.title p {
+    margin: 0;
+    margin-bottom: 0.25rem;
 }
 
-.leading-\[0\] {
-  line-height: 0;
+.title p:last-child {
+    margin-bottom: 0;
 }
 
-.min-h-px {
-  min-height: 1px;
+.divider {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 0;
+    margin: 0;
 }
 
-.min-w-px {
-  min-width: 1px;
+.divider p {
+    margin: 0;
 }
 
-.not-italic {
-  font-style: normal;
+.metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 1rem;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
-.relative {
-  position: relative;
+.job-info {
+    flex: 1;
+    text-align: left;
 }
 
-.shrink-0 {
-  flex-shrink: 0;
+.job-info p {
+    margin: 0;
+    margin-bottom: 0.25rem;
 }
 
-.size-full {
-  width: 100%;
-  height: 100%;
+.job-info p:last-child {
+    margin-bottom: 0;
 }
 
-.translate-x-\[-50\%\] {
-  transform: translateX(-50%);
+.year-info {
+    width: 72px;
+    text-align: right;
+    line-height: 1;
 }
 
-.translate-y-\[-50\%\] {
-  transform: translateY(-50%);
+.year-info p {
+    margin: 0;
+    margin-bottom: 0.25rem;
 }
 
-/* Custom positioning for exact Figma match */
-.ticket-container {
-  position: absolute;
-  top: calc(50% - 1px);
-  left: calc(50% - 12px);
+.year-info p:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+    .ticket-content {
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+        max-width: 280px;
+    }
+    
+    .title, .divider, .metadata {
+        font-size: 0.875rem;
+    }
+    
+    .year-info {
+        width: 60px;
+    }
 }

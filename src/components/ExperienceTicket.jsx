@@ -1,102 +1,88 @@
 import React from "react";
 import "./ExperienceTicket.css";
 
-export function ExperienceTicket() {
-  return (
-    <div className="bg-gradient-to-b from-[#e5e5e5] to-[#d4d4d4] relative size-full">
-      <div className="absolute bg-neutral-50 box-border content-stretch flex flex-col gap-6 items-start justify-start px-6 py-16 translate-x-[-50%] translate-y-[-50%] w-[372px] ticket-container">
-        <div className="content-stretch flex gap-2 items-start justify-center relative shrink-0 w-full">
-          <div className="basis-0 grow leading-none min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-center text-neutral-900 uppercase">
-            <p className="mb-0">Previous experience</p>
-            <p>& Education</p>
-          </div>
+export function ExperienceTicket({ isFlipped }) {
+    return (
+        <div className="experience-ticket">
+            <div className="ticket-content">
+                <div className="title">
+                    <p>Previous Experience</p>
+                    <p>& Education</p>
+                </div>
+                
+                <div className="divider">
+                    <p>_______________________________</p>
+                </div>
+                
+                <div className="metadata">
+                    <div className="job-info">
+                        <p>User Interface Designer</p>
+                        <p>— @ Idea Couture Inc.</p>
+                        <p>/Cognizant</p>
+                    </div>
+                    <div className="year-info">
+                        <p>2021</p>
+                        <p>— 2017</p>
+                    </div>
+                </div>
+                
+                <div className="metadata">
+                    <div className="job-info">
+                        <p>Service Designer</p>
+                        <p>— @ CAPPA Global</p>
+                        <p>/Tamayo Capital</p>
+                    </div>
+                    <div className="year-info">
+                        <p>2021</p>
+                    </div>
+                </div>
+                
+                <div className="metadata">
+                    <div className="job-info">
+                        <p>Graphic Designer</p>
+                        <p>/Art Director</p>
+                        <p>— @ WRKR®</p>
+                    </div>
+                    <div className="year-info">
+                        <p>2021</p>
+                        <p>-2017</p>
+                    </div>
+                </div>
+                
+                <div className="metadata">
+                    <div className="job-info">
+                        <p>Graphic Designer</p>
+                        <p>— @ Vinoteca méxico</p>
+                    </div>
+                    <div className="year-info">
+                        <p>2021</p>
+                        <p>-2017</p>
+                    </div>
+                </div>
+                
+                <div className="divider">
+                    <p>*******</p>
+                </div>
+                
+                <div className="metadata">
+                    <div className="job-info">
+                        <p>Bachelor's Degree in Industrial and Product Design</p>
+                        <p>— @ Universidad Autónoma de Nuevo León</p>
+                    </div>
+                </div>
+                
+                <div className="metadata">
+                    <div className="job-info">
+                        <p>Master in Design Thinking and</p>
+                        <p>UX/UI Design</p>
+                        <p>— @ Barreira Arte + Diseño</p>
+                    </div>
+                </div>
+                
+                <div className="divider">
+                    <p>*******</p>
+                </div>
+            </div>
         </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center relative shrink-0 w-full">
-          <div className="basis-0 grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-center text-neutral-900 uppercase">
-            <p className="leading-none">________________________________</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-neutral-900 uppercase w-full">
-          <div className="basis-0 grow leading-none min-h-px min-w-px relative shrink-0">
-            <p className="mb-0">
-              User Interface Designer
-              <br aria-hidden="true" />
-              — @ Idea Couture Inc.
-            </p>
-            <p>/Cognizant</p>
-          </div>
-          <div className="leading-none relative shrink-0 text-right w-[72px]">
-            <p className="mb-0">2021</p>
-            <p>— 2017</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-neutral-900 uppercase w-full">
-          <div className="basis-0 grow leading-none min-h-px min-w-px relative shrink-0">
-            <p className="mb-0">Service Designer</p>
-            <p className="mb-0">— @ CAPPA Global</p>
-            <p>/Tamayo Capital</p>
-          </div>
-          <div className="leading-none relative shrink-0 text-right w-[72px]">
-            <p className="mb-0">2021</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-neutral-900 uppercase w-full">
-          <div className="basis-0 grow leading-none min-h-px min-w-px relative shrink-0">
-            <p className="mb-0">Graphic Designer</p>
-            <p className="mb-0">/Art Director</p>
-            <p>— @ WRKR®</p>
-          </div>
-          <div className="leading-none relative shrink-0 text-right w-[72px]">
-            <p className="mb-0">2021</p>
-            <p>-2017</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-neutral-900 uppercase w-full">
-          <div className="basis-0 grow min-h-px min-w-px relative shrink-0">
-            <p className="leading-none">
-              Graphic Designer
-              <br aria-hidden="true" />
-              — @ Vinoteca méxico
-            </p>
-          </div>
-          <div className="leading-none relative shrink-0 text-right w-[72px]">
-            <p className="mb-0">2021</p>
-            <p>-2017</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-center justify-center relative shrink-0 w-full">
-          <div className="basis-0 grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-center text-neutral-900 uppercase">
-            <p className="leading-none">*******</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center relative shrink-0 w-full">
-          <div className="basis-0 grow leading-none min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-neutral-900 uppercase">
-            <p className="mb-0">Bachelor's Degree in Industrial and Product Design</p>
-            <p>— @ Universidad Autónoma de Nuevo León</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-start justify-center relative shrink-0 w-full">
-          <div className="basis-0 grow leading-none min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-neutral-900 uppercase">
-            <p className="mb-0">Master in Design Thinking and</p>
-            <p className="mb-0">UX/UI Design</p>
-            <p>— @ Barreira Arte + Diseño</p>
-          </div>
-        </div>
-        
-        <div className="content-stretch flex gap-2 items-center justify-center relative shrink-0 w-full">
-          <div className="basis-0 grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-center text-neutral-900 uppercase">
-            <p className="mb-0">*******</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

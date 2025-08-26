@@ -10,21 +10,6 @@
   box-sizing: border-box;
 }
 
-.app::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(168, 162, 158, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(168, 162, 158, 0.2) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 1;
-}
-
 .view-toggle {
   position: fixed;
   top: 2rem;
@@ -45,13 +30,13 @@
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.7);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: inherit;
+  white-space: nowrap;
 }
 
 .toggle-btn:hover {
@@ -63,6 +48,21 @@
   background: rgba(255, 255, 255, 0.2);
   color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(168, 162, 158, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(168, 162, 158, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .floating-card-container {
@@ -109,8 +109,8 @@
   }
   
   .toggle-btn {
+    padding: 0.6rem 1.2rem;
     font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
   }
   
   .instructions {
@@ -133,10 +133,13 @@
   }
   
   .view-toggle {
-    top: 0.5rem;
-    left: 1rem;
-    right: 1rem;
-    transform: none;
-    justify-content: center;
+    top: 0.8rem;
+    gap: 0.3rem;
+    padding: 0.3rem;
+  }
+  
+  .toggle-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
   }
 }
