@@ -25,6 +25,46 @@
   z-index: 1;
 }
 
+.view-toggle {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.toggle-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .floating-card-container {
   position: relative;
   z-index: 10;
@@ -63,6 +103,16 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .view-toggle {
+    top: 1rem;
+    padding: 0.4rem;
+  }
+  
+  .toggle-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
   .instructions {
     bottom: 1rem;
     left: 1rem;
@@ -80,5 +130,13 @@
   
   .floating-card-container {
     padding: 0;
+  }
+  
+  .view-toggle {
+    top: 0.5rem;
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    justify-content: center;
   }
 }
