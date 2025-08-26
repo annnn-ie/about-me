@@ -1,0 +1,60 @@
+/* Exact Figma design classes */
+.content-stretch {
+  align-content: stretch;
+}
+
+.basis-0 {
+  flex-basis: 0;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+.leading-\[0\] {
+  line-height: 0;
+}
+
+.min-h-px {
+  min-height: 1px;
+}
+
+.min-w-px {
+  min-width: 1px;
+}
+
+.not-italic {
+  font-style: normal;
+}
+
+.relative {
+  position: relative;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+.size-full {
+  width: 100%;
+  height: 100%;
+}
+
+.translate-x-\[-50\%\] {
+  transform: translateX(-50%);
+}
+
+.translate-y-\[-50\%\] {
+  transform: translateY(-50%);
+}
+
+/* Custom positioning for exact Figma match */
+.ticket-container {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% - 12px);
+}
