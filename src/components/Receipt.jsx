@@ -80,6 +80,11 @@ export function Receipt() {
         <div className="receipt-divider">
           <p>*******</p>
         </div>
+        <div className="receipt-section">
+          <div className="receipt-info">
+            <p>THANK YOU FOR YOUR VISIT :-)</p>
+          </div>
+        </div>
       </div>
     </div>
   );

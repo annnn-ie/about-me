@@ -190,6 +190,7 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
                     rotateX: (isMobile || isMobileDevice) ? 0 : rotateX, // No rotation on mobile
                     rotateY: (isMobile || isMobileDevice) ? 0 : rotateY, // No rotation on mobile
                     scale: (isMobile || isMobileDevice) ? 1 : scale, // No scale on mobile
+                    rotate: (isMobile || isMobileDevice) ? 0 : randomRotation, // Add random rotation like the card
                 }}
             >
                 <div
