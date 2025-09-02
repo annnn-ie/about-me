@@ -74,16 +74,16 @@ const ScribbleEffect = ({ children, isFlipped }) => {
         // Load a new scribble when the card flips back to front (isFlipped becomes false)
         // Don't reload when flipping to back (isFlipped becomes true)
         if (isFlipped === false) {
-            console.log('✅ Flipping back to front, will fade out scribble and load new one in 500ms');
+            console.log('✅ Flipping back to front, will fade out scribble and load new one in 100ms');
             // First fade out the current scribble
             setTimeout(() => {
-                setIsVisible(false); // Fade out current scribble
-                // Then load new scribble after fade out completes
+                setIsVisible(false); // Fade out current scribble instantly
+                // Then load new scribble immediately after fade out
                 setTimeout(() => {
                     loadRandomScribble();
                     setIsVisible(true); // Show new scribble
-                }, 150); // Wait for fade out to complete
-            }, 500); // Start fade out at 500ms
+                }, 0); // No delay - instant new scribble
+            }, 100); // Reduced delay to 100ms
         } else {
             console.log('🔄 Flipping to back, keeping current scribble');
         }
