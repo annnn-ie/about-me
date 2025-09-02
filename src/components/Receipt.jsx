@@ -21,7 +21,7 @@ export function Receipt() {
           </div>
           <div className="receipt-date">
             <p>2021</p>
-            <p>- 2017</p>
+            <p>-2017</p>
           </div>
         </div>
         
