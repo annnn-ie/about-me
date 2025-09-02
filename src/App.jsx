@@ -113,6 +113,7 @@ function App() {
                 frontContent={frontContent}
                 backContent={backContent}
                 onFlipChange={setIsFlipped}
+                isFlipped={isFlipped}
                 breakpoint={breakpoint}
               />
             </motion.div>
