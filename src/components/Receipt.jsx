@@ -11,7 +11,7 @@ export function Receipt() {
         </div>
         
         <div className="receipt-divider">
-          <p>_____________________________</p>
+          <p>_________________________________</p>
         </div>
         
         <div className="receipt-section">
@@ -21,7 +21,7 @@ export function Receipt() {
           </div>
           <div className="receipt-date">
             <p>2021</p>
-            <p>— 2017</p>
+            <p>- 2017</p>
           </div>
         </div>
         
@@ -65,15 +65,15 @@ export function Receipt() {
         
         <div className="receipt-section">
           <div className="receipt-info">
-            <p>Bachelor's Degree in Industrial and Product Design</p>
-            <p>— @ Universidad Autónoma de Nuevo León</p>
-          </div>
-        </div>
-        
-        <div className="receipt-section">
-          <div className="receipt-info">
             <p>Master in Design Thinking and UX/UI Design</p>
             <p>— @ Barreira Arte + Diseño</p>
+          </div>
+        </div>
+
+        <div className="receipt-section">
+          <div className="receipt-info">
+            <p>Bachelor's Degree in Industrial and Product Design</p>
+            <p>— @ Universidad Autónoma de Nuevo León</p>
           </div>
         </div>
         
@@ -82,7 +82,7 @@ export function Receipt() {
         </div>
         <div className="receipt-section">
           <div className="receipt-info">
-            <p>THANK YOU FOR YOUR VISIT :-)</p>
+            <p>THANK YOU FOR YOUR VISIT :-) </p>
           </div>
         </div>
       </div>

@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const springValues = {
-  damping: 30,
-  stiffness: 100,
-  mass: 2,
+  damping: 20,
+  stiffness: 80,
+  mass: 1.5,
 };
 
 const resetSpringValues = {
-  damping: 25,
-  stiffness: 150,
+  damping: 18,
+  stiffness: 120,
   mass: 1,
 };
 
@@ -55,9 +55,9 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
         checkMobileDevice();
     }, []);
 
-    // Generate random rotation on component mount
+    // Generate random rotation on component mount with smoother transition
     useEffect(() => {
-        setRandomRotation(Math.random() * 8 - 4); // Random value between -4 and +4 degrees
+        setRandomRotation(Math.random() * 4 - 2); // Reduced range from ±4° to ±2° for subtler effect
         setHasMounted(true);
     }, []);
 
@@ -66,10 +66,15 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
     const rotateX = useSpring(0, springValues);
     const rotateY = useSpring(0, springValues);
     const scale = useSpring(1, springValues);
+    const rotation = useSpring(randomRotation, { 
+        damping: 25, 
+        stiffness: 100, 
+        duration: 1.2 
+    }); // Smooth rotation spring
 
     // Simplify effects for mobile devices
-    const rotateAmplitude = (isMobile || isMobileDevice) ? 2 : 8; // Subtle rotation for both mobile and desktop
-    const scaleOnHover = (isMobile || isMobileDevice) ? 1.005 : 1.02; // Minimal hover scale on mobile
+    const rotateAmplitude = (isMobile || isMobileDevice) ? 1 : 4; // Reduced from 2:6 to 1:4 for more subtle tilt
+    const scaleOnHover = (isMobile || isMobileDevice) ? 1.005 : 1.015; // Reduced from 1.02 to 1.015 for subtler hover
 
     // Handle touch events for mobile
     const handleTouchStart = (e) => {
@@ -111,8 +116,10 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
             scale.set(1);
             rotateX.set(0); // Reset tilt
             rotateY.set(0); // Reset tilt
-            // Generate new random rotation when mouse leaves
-            setRandomRotation(Math.random() * 8 - 4);
+            // Generate new random rotation when mouse leaves with smooth transition
+            const newRotation = Math.random() * 4 - 2;
+            setRandomRotation(newRotation);
+            rotation.set(newRotation); // Smooth transition
         }
     }
 
@@ -133,8 +140,10 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
         // Reset tilt
         rotateX.set(0);
         rotateY.set(0);
-        // Generate new random rotation
-        setRandomRotation(Math.random() * 8 - 4);
+        // Generate new random rotation with smooth transition
+        const newRotation = Math.random() * 4 - 2;
+        setRandomRotation(newRotation);
+        rotation.set(newRotation); // Smooth transition
         
         // Reset the reset flag after animation
         setTimeout(() => {
@@ -190,7 +199,7 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
                     rotateX: (isMobile || isMobileDevice) ? 0 : rotateX, // No rotation on mobile
                     rotateY: (isMobile || isMobileDevice) ? 0 : rotateY, // No rotation on mobile
                     scale: (isMobile || isMobileDevice) ? 1 : scale, // No scale on mobile
-                    rotate: (isMobile || isMobileDevice) ? 0 : randomRotation, // Add random rotation like the card
+                    rotate: (isMobile || isMobileDevice) ? 0 : rotation, // Use smooth rotation spring instead of direct state
                 }}
             >
                 <div

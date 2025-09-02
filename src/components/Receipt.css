@@ -7,14 +7,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Geist Mono', monospace;
+  font-family: 'DepartureMono', 'Geist Mono', monospace;
   overflow: visible;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
-  padding: 64px 24px;
+  padding: 56px 24px;
   background: #fafafa; /* neutral-50 */
   color: #171717; /* neutral-900 */
   filter: url(#receipt-shadow-only); /* Shadow only, no texture */
@@ -33,7 +33,7 @@
 }
 
 .receipt-title {
-  font-size: clamp(12px, 1.5vw, 16px);
+  font-size: clamp(10px, 1.5vw, 14px);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
@@ -47,7 +47,7 @@
 }
 
 .receipt-divider {
-  font-size: clamp(12px, 1.5vw, 16px);
+  font-size: clamp(10px, 1.5vw, 14px);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
@@ -66,7 +66,7 @@
   gap: 8px;
   align-items: flex-start;
   justify-content: space-between;
-  font-size: clamp(12px, 1.5vw, 16px);
+  font-size: clamp(10px, 1.5vw, 14px);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
@@ -113,17 +113,17 @@
 }
 
 .receipt-mobile .receipt-title {
-  font-size: 14px !important;
+  font-size: 12px !important;
   line-height: 1 !important;
 }
 
 .receipt-mobile .receipt-divider {
-  font-size: 14px !important;
+  font-size: 12px !important;
   line-height: 1 !important;
 }
 
 .receipt-mobile .receipt-section {
-  font-size: 14px !important;
+  font-size: 12px !important;
   line-height: 1 !important;
   gap: 6px !important;
 }
@@ -145,7 +145,7 @@
   .receipt-title,
   .receipt-divider,
   .receipt-section {
-    font-size: clamp(10px, 1.2vw, 14px);
+    font-size: clamp(8px, 1.2vw, 12px);
   }
 }
 
@@ -161,7 +161,7 @@
   .receipt-title,
   .receipt-divider,
   .receipt-section {
-    font-size: 12px;
+    font-size: 10px;
   }
   
   .receipt-date {
