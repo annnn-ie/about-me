@@ -83,7 +83,7 @@ const ScribbleEffect = ({ children, isFlipped }) => {
             setTimeout(() => {
                 loadRandomScribble();
                 setIsVisible(true);
-            }, 600); // Wait for flip animation to complete
+            }, 300); // Reduced delay for faster new scribble
         }
     }, [isFlipped]);
 
