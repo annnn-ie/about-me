@@ -67,7 +67,7 @@
 }
 
 .tabs-list-underline {
-  border-bottom: 1px solid #e5e5e5;
+  /* Container border removed for cleaner look */
 }
 
 .tabs-item {
