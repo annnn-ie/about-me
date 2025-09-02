@@ -2,6 +2,11 @@
     overflow: visible;
 }
 
+/* Fade out transition for scribble visibility */
+.scribble-container {
+    transition: opacity 0.3s ease-in-out;
+}
+
 .scribble-container .animated-path {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;

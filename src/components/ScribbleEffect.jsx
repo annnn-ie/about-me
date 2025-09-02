@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './ScribbleEffect.css';
 
-const ScribbleEffect = ({ children, cardFlipped }) => {
+const ScribbleEffect = ({ children, isFlipped }) => {
+    // Generate a unique ID for this component instance to track re-mounts
+    const componentId = React.useMemo(() => Math.random().toString(36).substr(2, 9), []);
+    
     const [selectedScribble, setSelectedScribble] = useState(null);
     const [svgContent, setSvgContent] = useState(null);
     const [isSmile, setIsSmile] = useState(false);
+    const [isVisible, setIsVisible] = useState(true); // Control scribble visibility
     
     // Array of scribble SVG paths
     const scribblePaths = [
@@ -16,8 +20,9 @@ const ScribbleEffect = ({ children, cardFlipped }) => {
         '/scribbles/path-6.svg',
         '/scribbles/smile.svg'
     ];
-
+    
     const loadRandomScribble = () => {
+        console.log('🔄 Loading new scribble, isFlipped:', isFlipped, 'at:', new Date().toISOString());
         // Randomly select a scribble
         const randomIndex = Math.floor(Math.random() * scribblePaths.length);
         const selectedPath = scribblePaths[randomIndex];
@@ -56,16 +61,33 @@ const ScribbleEffect = ({ children, cardFlipped }) => {
     };
 
     useEffect(() => {
+        console.log('🚀 Component mounted, loading initial scribble, ID:', componentId);
         // Load initial scribble on component mount
         loadRandomScribble();
-    }, []);
+    }, [componentId]);
+
+    // Debug: Log every render to see if component is re-rendering unnecessarily
+    console.log('🔄 ScribbleEffect render, ID:', componentId, 'isFlipped:', isFlipped, 'selectedScribble:', selectedScribble);
 
     useEffect(() => {
-        // When card flips back to front (cardFlipped becomes false), load a new scribble
-        if (cardFlipped === false) {
-            loadRandomScribble();
+        console.log('🔄 isFlipped changed to:', isFlipped);
+        // Load a new scribble when the card flips back to front (isFlipped becomes false)
+        // Don't reload when flipping to back (isFlipped becomes true)
+        if (isFlipped === false) {
+            console.log('✅ Flipping back to front, will fade out scribble and load new one in 500ms');
+            // First fade out the current scribble
+            setTimeout(() => {
+                setIsVisible(false); // Fade out current scribble
+                // Then load new scribble after fade out completes
+                setTimeout(() => {
+                    loadRandomScribble();
+                    setIsVisible(true); // Show new scribble
+                }, 150); // Wait for fade out to complete
+            }, 500); // Start fade out at 500ms
+        } else {
+            console.log('🔄 Flipping to back, keeping current scribble');
         }
-    }, [cardFlipped]);
+    }, [isFlipped]);
 
     if (!selectedScribble || !svgContent) {
         return <span>{children}</span>;
@@ -84,7 +106,8 @@ const ScribbleEffect = ({ children, cardFlipped }) => {
                     height: 'auto',
                     maxWidth: isSmile ? '80px' : '120px',
                     pointerEvents: 'none',
-                    zIndex: 1
+                    zIndex: 1,
+                    opacity: isVisible ? 1 : 0
                 }}
                 dangerouslySetInnerHTML={{ __html: svgContent }}
             />

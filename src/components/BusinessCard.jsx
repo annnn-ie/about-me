@@ -7,7 +7,7 @@ export function BusinessCard({ isFlipped }) {
         <div className="business-card business-card-front">
             <div className="card-top">
                 <div className="name">
-                    <ScribbleEffect cardFlipped={isFlipped}>Anairam</ScribbleEffect> (Annie) Isaías
+                    <ScribbleEffect isFlipped={isFlipped}>Anairam</ScribbleEffect> (Annie) Isaías
                 </div>
                 <div className="title">Product Designer. Educator.</div>
                 <div className="company">
