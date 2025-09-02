@@ -1,0 +1,189 @@
+.receipt {
+  width: 100%;
+  height: auto;
+  min-height: fit-content;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Geist Mono', monospace;
+  overflow: visible;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 64px 24px;
+  background: #fafafa; /* neutral-50 */
+  color: #171717; /* neutral-900 */
+  filter: url(#receipt-shadow-only); /* Shadow only, no texture */
+}
+
+.receipt-content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  filter: blur(0.5px) url(#ink-bleed-filter); /* Reduced blur for better readability */
+}
+
+.receipt-title {
+  font-size: clamp(12px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #171717;
+  margin: 0;
+}
+
+.receipt-title p {
+  margin: 0;
+  line-height: 1;
+}
+
+.receipt-divider {
+  font-size: clamp(12px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #171717;
+  margin: 0;
+}
+
+.receipt-divider p {
+  margin: 0;
+  line-height: 1;
+}
+
+.receipt-section {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: clamp(12px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #171717;
+}
+
+.receipt-info {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.receipt-info p {
+  margin: 0;
+  line-height: 1;
+}
+
+.receipt-date {
+  width: 72px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.receipt-date p {
+  margin: 0;
+  line-height: 1;
+}
+
+/* Mobile breakpoint styles - xs breakpoint from Figma */
+.receipt-mobile {
+  padding: clamp(10px, 2vw, 19.731px) !important;
+  border-radius: 6px !important;
+  min-height: 200px !important;
+  min-width: 280px !important;
+  position: relative !important;
+  z-index: 1 !important;
+  box-shadow: 0 12.825px 3.453px 0px rgba(0,0,0,0), 0 8.386px 3.453px 0px rgba(0,0,0,0.01), 0 4.439px 2.96px 0px rgba(0,0,0,0.05), 0 1.973px 1.973px 0px rgba(0,0,0,0.09), 0 0.493px 0.987px 0px rgba(0,0,0,0.1) !important;
+}
+
+.receipt-mobile .receipt-content {
+  gap: 16px !important;
+}
+
+.receipt-mobile .receipt-title {
+  font-size: 14px !important;
+  line-height: 1 !important;
+}
+
+.receipt-mobile .receipt-divider {
+  font-size: 14px !important;
+  line-height: 1 !important;
+}
+
+.receipt-mobile .receipt-section {
+  font-size: 14px !important;
+  line-height: 1 !important;
+  gap: 6px !important;
+}
+
+.receipt-mobile .receipt-date {
+  width: 60px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .receipt {
+    padding: clamp(15px, 3vw, 30px);
+  }
+  
+  .receipt-content {
+    gap: 20px;
+  }
+  
+  .receipt-title,
+  .receipt-divider,
+  .receipt-section {
+    font-size: clamp(10px, 1.2vw, 14px);
+  }
+}
+
+@media (max-width: 480px) {
+  .receipt {
+    padding: 15px;
+  }
+  
+  .receipt-content {
+    gap: 16px;
+  }
+  
+  .receipt-title,
+  .receipt-divider,
+  .receipt-section {
+    font-size: 12px;
+  }
+  
+  .receipt-date {
+    width: 60px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .receipt {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Ensure proper mobile card proportions */
+@media (max-width: 480px) {
+  .receipt {
+    aspect-ratio: 13/9;
+    max-width: 320px;
+    max-height: 220px;
+    width: 320px;
+    height: 220px;
+  }
+}
