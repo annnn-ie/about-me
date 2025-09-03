@@ -8,7 +8,7 @@ const ScribbleEffect = ({ children, isFlipped }) => {
     const [selectedScribble, setSelectedScribble] = useState(null);
     const [svgContent, setSvgContent] = useState(null);
     const [isSmile, setIsSmile] = useState(false);
-    const [isVisible, setIsVisible] = useState(true); // Control scribble visibility
+    const [isVisible, setIsVisible] = useState(false); // Start hidden, will be controlled by isFlipped
     
     // Array of scribble SVG paths
     const scribblePaths = [
@@ -62,9 +62,12 @@ const ScribbleEffect = ({ children, isFlipped }) => {
 
     useEffect(() => {
         console.log('🚀 Component mounted, loading initial scribble, ID:', componentId);
-        // Load initial scribble on component mount
+        // Load initial scribble on component mount, but don't show it yet
         loadRandomScribble();
-    }, [componentId]);
+        
+        // Set initial visibility based on isFlipped state
+        setIsVisible(!isFlipped);
+    }, [componentId, isFlipped]);
 
     // Debug: Log every render to see if component is re-rendering unnecessarily
     console.log('🔄 ScribbleEffect render, ID:', componentId, 'isFlipped:', isFlipped, 'selectedScribble:', selectedScribble);

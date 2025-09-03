@@ -16,8 +16,8 @@ const resetSpringValues = {
 /**
  * 3D Flip Card Component with Tilt Effect, Random Rotation, and Drag Functionality
  */
-export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
-    const [isFlipped, setIsFlipped] = useState(false);
+export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: externalIsFlipped, ...props }) {
+    const [isFlipped, setIsFlipped] = useState(externalIsFlipped);
     const [isHovered, setIsHovered] = useState(false);
     const [randomRotation, setRandomRotation] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
@@ -28,6 +28,11 @@ export function Card3D({ frontContent, backContent, onFlipChange, ...props }) {
     useEffect(() => {
         setRandomRotation(Math.random() * 8 - 4); // Random value between -4 and +4 degrees
     }, []);
+
+    // Sync with external flip state
+    useEffect(() => {
+        setIsFlipped(externalIsFlipped);
+    }, [externalIsFlipped]);
 
     const x = useMotionValue(0);
     const y = useMotionValue(0);

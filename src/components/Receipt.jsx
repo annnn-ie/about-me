@@ -11,7 +11,7 @@ export function Receipt() {
         </div>
         
         <div className="receipt-divider">
-          <p>_________________________________</p>
+          <p>______________________________</p>
         </div>
         
         <div className="receipt-section">

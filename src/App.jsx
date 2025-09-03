@@ -8,10 +8,11 @@ import { Tabs } from './components/application/tabs/tabs'
 import './App.css'
 
 function App() {
-  const [isFlipped, setIsFlipped] = useState(false); // Start with front side
+  const [isFlipped, setIsFlipped] = useState(true); // Start with back side visible
   const [breakpoint, setBreakpoint] = useState('default');
   const [selectedTab, setSelectedTab] = useState('about'); // 'about' or 'resume'
   const [hasSwitchedViews, setHasSwitchedViews] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true); // Track if this is the first load
   
   const tabs = [
     { id: "about", label: "About" },
@@ -37,6 +38,24 @@ function App() {
     
     return () => window.removeEventListener('resize', checkBreakpoint);
   }, []);
+
+  // Handle first load animation
+  useEffect(() => {
+    if (isFirstLoad) {
+      // First, let the entrance animation complete (1.2s), then start flip sequence
+      const entranceTimer = setTimeout(() => {
+        // After entrance animation completes, start flip sequence
+        const flipTimer = setTimeout(() => {
+          setIsFlipped(false);
+          setIsFirstLoad(false);
+        }, 1600);
+        
+        return () => clearTimeout(flipTimer);
+      }, 1200); // Wait for entrance animation to complete
+      
+      return () => clearTimeout(entranceTimer);
+    }
+  }, [isFirstLoad]);
   
   const { frontContent, backContent } = useMemo(() => 
     BusinessCard({ isFlipped, breakpoint }), 
@@ -57,7 +76,7 @@ function App() {
   // Animation variants for slide transitions
   const slideVariants = {
     enter: {
-      x: 1000,
+      x: 1100,
       opacity: 1,
     },
     center: {
@@ -65,9 +84,58 @@ function App() {
       opacity: 1,
     },
     exit: {
-      x: -1000,
+      x: -1100,
       opacity: 1,
     },
+  };
+
+  // Animation variants for first load (top-to-center)
+  const firstLoadVariants = {
+    enter: {
+      y: -1100,
+      opacity: 0,
+    },
+    center: {
+      y: 0,
+      opacity: 1,
+    },
+    exit: {
+      y: -1100,
+      opacity: 0,
+    },
+  };
+
+  // Choose animation variants based on whether it's first load or view switching
+  const getAnimationVariants = () => {
+    if (isFirstLoad && selectedTab === 'about') {
+      return firstLoadVariants;
+    }
+    return slideVariants;
+  };
+
+  // Choose animation transition based on whether it's first load or view switching
+  const getAnimationTransition = () => {
+    if (isFirstLoad && selectedTab === 'about') {
+      return {
+        y: { 
+          type: "tween",
+          ease: [0.77, 0, 0.175, 1],
+          duration: 1.2
+        },
+        opacity: {
+          type: "tween",
+          ease: [0.77, 0, 0.175, 1],
+          duration: 1.2
+        }
+      };
+    }
+    return {
+      x: { 
+        type: "tween",
+        ease: [0.77, 0, 0.175, 1],
+        duration: 0.8
+      }
+    };
   };
 
   return (
@@ -77,17 +145,11 @@ function App() {
           {selectedTab === 'resume' ? (
             <motion.div
               key="receipt"
-              variants={slideVariants}
+              variants={getAnimationVariants()}
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{
-                x: { 
-                  type: "tween",
-                  ease: [0.77, 0, 0.175, 1],
-                  duration: 0.8
-                }
-              }}
+              transition={getAnimationTransition()}
             >
               <ReceiptCard 
                 content={<Receipt />}
@@ -97,17 +159,11 @@ function App() {
           ) : (
             <motion.div
               key="card"
-              variants={slideVariants}
+              variants={getAnimationVariants()}
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{
-                x: { 
-                  type: "tween",
-                  ease: [0.77, 0, 0.175, 1],
-                  duration: 0.8
-                }
-              }}
+              transition={getAnimationTransition()}
             >
               <Card3D 
                 frontContent={frontContent}
