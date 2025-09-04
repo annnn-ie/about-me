@@ -64,10 +64,12 @@ const ScribbleEffect = ({ children, isFlipped }) => {
         console.log('🚀 Component mounted, loading initial scribble, ID:', componentId);
         // Load initial scribble on component mount, but don't show it yet
         loadRandomScribble();
-        
-        // Set initial visibility based on isFlipped state
+    }, [componentId]);
+
+    // Set initial visibility based on isFlipped state (only on mount)
+    useEffect(() => {
         setIsVisible(!isFlipped);
-    }, [componentId, isFlipped]);
+    }, []);
 
     // Debug: Log every render to see if component is re-rendering unnecessarily
     console.log('🔄 ScribbleEffect render, ID:', componentId, 'isFlipped:', isFlipped, 'selectedScribble:', selectedScribble);
