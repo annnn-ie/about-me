@@ -9,35 +9,18 @@ import './App.css'
 
 function App() {
   const [isFlipped, setIsFlipped] = useState(true); // Start with back side visible
-  const [breakpoint, setBreakpoint] = useState('default');
+
   const [selectedTab, setSelectedTab] = useState('about'); // 'about' or 'resume'
   const [hasSwitchedViews, setHasSwitchedViews] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true); // Track if this is the first load
+  const [tabsEnabled, setTabsEnabled] = useState(false); // Control when tabs become available
   
   const tabs = [
     { id: "about", label: "About" },
     { id: "resume", label: "Resume" },
   ];
   
-  // Detect mobile breakpoint
-  useEffect(() => {
-    const checkBreakpoint = () => {
-      const width = window.innerWidth;
-      if (width <= 480) {
-        setBreakpoint('xs');
-      } else {
-        setBreakpoint('default');
-      }
-    };
-    
-    // Check on mount
-    checkBreakpoint();
-    
-    // Check on resize
-    window.addEventListener('resize', checkBreakpoint);
-    
-    return () => window.removeEventListener('resize', checkBreakpoint);
-  }, []);
+
 
   // Handle first load animation
   useEffect(() => {
@@ -48,7 +31,14 @@ function App() {
         const flipTimer = setTimeout(() => {
           setIsFlipped(false);
           setIsFirstLoad(false);
-        }, 1600);
+          
+          // Enable tabs after flip animation completes (0.6s flip duration)
+          const tabsTimer = setTimeout(() => {
+            setTabsEnabled(true);
+          }, 600);
+          
+          return () => clearTimeout(tabsTimer);
+        }, 800); // Reduced from 1600ms to 800ms
         
         return () => clearTimeout(flipTimer);
       }, 1200); // Wait for entrance animation to complete
@@ -58,8 +48,8 @@ function App() {
   }, [isFirstLoad]);
   
   const { frontContent, backContent } = useMemo(() => 
-    BusinessCard({ isFlipped, breakpoint }), 
-    [isFlipped, breakpoint]
+    BusinessCard({ isFlipped }), 
+    [isFlipped]
   )
 
 
@@ -153,7 +143,6 @@ function App() {
             >
               <ReceiptCard 
                 content={<Receipt />}
-                breakpoint={breakpoint}
               />
             </motion.div>
           ) : (
@@ -170,28 +159,50 @@ function App() {
                 backContent={backContent}
                 onFlipChange={setIsFlipped}
                 isFlipped={isFlipped}
-                breakpoint={breakpoint}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
       
-      <div className="tab-container">
-        <Tabs selectedKey={selectedTab} onSelectionChange={handleTabChange} className="w-max">
-          <Tabs.List type="underline" items={tabs}>
-            {(tab) => (
-              <Tabs.Item 
-                key={tab.id}
-                id={tab.id}
-                label={tab.label}
-                isSelected={selectedTab === tab.id}
-                onPress={handleTabChange}
-              />
-            )}
-          </Tabs.List>
-        </Tabs>
-      </div>
+      <AnimatePresence>
+        {tabsEnabled && (
+          <motion.div 
+            className="tab-container"
+            style={{
+              position: 'fixed',
+              top: '2rem',
+              left: '50%',
+              zIndex: 20,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            initial={{ opacity: 0, y: 20, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            transition={{
+              type: "tween",
+              ease: [0.77, 0, 0.175, 1],
+              duration: 0.6
+            }}
+          >
+            <Tabs selectedKey={selectedTab} onSelectionChange={handleTabChange} className="w-max">
+              <Tabs.List type="underline" items={tabs}>
+                {(tab) => (
+                  <Tabs.Item 
+                    key={tab.id}
+                    id={tab.id}
+                    label={tab.label}
+                    isSelected={selectedTab === tab.id}
+                    onPress={handleTabChange}
+                  />
+                )}
+              </Tabs.List>
+            </Tabs>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* <div className="instructions">
         <p>Click to flip • Drag to move</p>

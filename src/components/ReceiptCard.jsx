@@ -16,26 +16,16 @@ const resetSpringValues = {
 /**
  * Receipt Card Component with Tilt Motion and Drag Functionality
  */
-export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
+export function ReceiptCard({ content, ...props }) {
     const [isHovered, setIsHovered] = useState(false);
     const [randomRotation, setRandomRotation] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [shouldReset, setShouldReset] = useState(false);
-    const [isMobileDevice, setIsMobileDevice] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const ref = useRef(null);
 
-    const isMobile = breakpoint === 'xs';
-
-    // Calculate dimensions based on breakpoint with 9:16 aspect ratio
-    const cardDimensions = isMobile ? {
-        width: "min(210px, calc(85vw * 9/16))", // Scaled proportionally from desktop 340px
-        height: "min(220px, calc(85vw * 9/13))", // Fixed height for tilt calculation
-        minHeight: "min(220px, calc(85vw * 9/13))",
-        maxWidth: "210px", // Scaled proportionally (340 * 0.618 ≈ 210)
-        maxHeight: "220px",
-        padding: "0"
-    } : {
+    // Calculate dimensions with 9:16 aspect ratio
+    const cardDimensions = {
         width: "min(340px, calc(90vw * 9/16))", // 9:16 ratio, more narrow
         height: "min(360px, calc(90vw * 9/13))", // Fixed height for tilt calculation
         minHeight: "min(360px, calc(90vw * 9/13))",
@@ -43,17 +33,6 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
         maxHeight: "360px",
         padding: "0"
     };
-
-    // Detect if we're on a mobile device
-    useEffect(() => {
-        const checkMobileDevice = () => {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
-            setIsMobileDevice(isMobileDevice);
-        };
-        
-        checkMobileDevice();
-    }, []);
 
     // Generate random rotation on component mount with smoother transition
     useEffect(() => {
@@ -72,25 +51,12 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
         duration: 1.2 
     }); // Smooth rotation spring
 
-    // Simplify effects for mobile devices
-    const rotateAmplitude = (isMobile || isMobileDevice) ? 1 : 4; // Reduced from 2:6 to 1:4 for more subtle tilt
-    const scaleOnHover = (isMobile || isMobileDevice) ? 1.005 : 1.015; // Reduced from 1.02 to 1.015 for subtler hover
-
-    // Handle touch events for mobile
-    const handleTouchStart = (e) => {
-        if (isMobile || isMobileDevice) {
-            console.log('Touch start on receipt');
-        }
-    };
-
-    const handleTouchEnd = (e) => {
-        if (isMobile || isMobileDevice) {
-            console.log('Touch end on receipt');
-        }
-    };
+    // Effects configuration
+    const rotateAmplitude = 4; // Tilt amplitude
+    const scaleOnHover = 1.015; // Scale on hover
 
     function handleMouse(e) {
-        if (!ref.current || !isHovered || isDragging || (isMobile || isMobileDevice)) return; // Don't process mouse movement on mobile
+        if (!ref.current || !isHovered || isDragging) return;
 
         const rect = ref.current.getBoundingClientRect();
         const offsetX = e.clientX - rect.left - rect.width / 2;
@@ -104,14 +70,14 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
     }
 
     function handleMouseEnter() {
-        if (!isDragging && !(isMobile || isMobileDevice)) {
+        if (!isDragging) {
             setIsHovered(true);
             scale.set(scaleOnHover);
         }
     }
 
     function handleMouseLeave() {
-        if (!isDragging && !(isMobile || isMobileDevice)) {
+        if (!isDragging) {
             setIsHovered(false);
             scale.set(1);
             rotateX.set(0); // Reset tilt
@@ -127,7 +93,7 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
         setIsDragging(true);
         setIsHovered(false);
         setShouldReset(false);
-        scale.set((isMobile || isMobileDevice) ? 1.01 : 1.05); // Smaller scale while dragging on mobile
+        scale.set(1.05); // Scale while dragging
     };
 
     const handleDragEnd = () => {
@@ -157,49 +123,44 @@ export function ReceiptCard({ content, breakpoint = 'default', ...props }) {
             onMouseMove={handleMouse}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
             drag
-            dragConstraints={(isMobile || isMobileDevice) ? 
-                { left: -50, right: 50, top: -40, bottom: 40 } : // Much smaller drag area on mobile
-                { left: -200, right: 200, top: -150, bottom: 150 }
-            }
+            dragConstraints={{ left: -200, right: 200, top: -150, bottom: 150 }}
             dragElastic={0}
             dragMomentum={false}
             dragSnapToOrigin={true}
             dragTransition={{ 
-                bounceStiffness: (isMobile || isMobileDevice) ? 600 : 400, // Stiffer on mobile
-                bounceDamping: (isMobile || isMobileDevice) ? 60 : 40, // More damping on mobile
-                power: (isMobile || isMobileDevice) ? 0.9 : 0.8,
-                timeConstant: (isMobile || isMobileDevice) ? 150 : 200
+                bounceStiffness: 400,
+                bounceDamping: 40,
+                power: 0.8,
+                timeConstant: 200
             }}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             style={{
-                perspective: (isMobile || isMobileDevice) ? "none" : "1100px", // Disable perspective on mobile
-                transformStyle: (isMobile || isMobileDevice) ? "flat" : "preserve-3d", // Flat transforms on mobile
+                perspective: "1100px",
+                transformStyle: "preserve-3d",
                 width: cardDimensions.width,
                 height: cardDimensions.height,
                 maxWidth: cardDimensions.maxWidth,
                 maxHeight: cardDimensions.maxHeight,
                 padding: cardDimensions.padding,
                 cursor: isDragging ? "grabbing" : "pointer",
-                filter: (isMobile || isMobileDevice) ? "none" : "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.08))", // No filter on mobile
+                filter: "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.08))",
                 overflow: "visible",
             }}
             {...props}
         >
             <motion.div
                 style={{
-                    perspective: (isMobile || isMobileDevice) ? "none" : "1200px", // Disable perspective on mobile
-                    transformStyle: (isMobile || isMobileDevice) ? "flat" : "preserve-3d", // Flat transforms on mobile
+                    perspective: "1200px",
+                    transformStyle: "preserve-3d",
                     width: "100%",
                     height: "100%", // Fixed height for proper tilt calculation
                     position: "relative",
-                    rotateX: (isMobile || isMobileDevice) ? 0 : rotateX, // No rotation on mobile
-                    rotateY: (isMobile || isMobileDevice) ? 0 : rotateY, // No rotation on mobile
-                    scale: (isMobile || isMobileDevice) ? 1 : scale, // No scale on mobile
-                    rotate: (isMobile || isMobileDevice) ? 0 : rotation, // Use smooth rotation spring instead of direct state
+                    rotateX: rotateX,
+                    rotateY: rotateY,
+                    scale: scale,
+                    rotate: rotation, // Use smooth rotation spring instead of direct state
                 }}
             >
                 <div
