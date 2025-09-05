@@ -2,6 +2,39 @@
     overflow: visible;
 }
 
+/* Mobile-specific scribble positioning fixes */
+@media (max-width: 768px) {
+    .scribble-container {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: auto;
+    }
+    
+    .scribble-container svg {
+        width: 105%;
+        height: auto;
+        max-width: 210px;
+        position: relative;
+    }
+    
+    /* Specific scaling for smiley - smaller and better positioned */
+    .scribble-container svg[data-scribble="smile"] {
+        width: 56px;
+        height: 56px;
+        max-width: 56px;
+        max-height: 56px;
+    }
+    
+    /* Mobile-specific smiley scaling only */
+    .scribble-container svg[data-scribble="smile"] {
+        width: 56px;
+        height: 56px;
+        max-width: 56px;
+        max-height: 56px;
+    }
+}
+
 /* Fade out transition for scribble visibility */
 .scribble-container {
     transition: opacity 0.05s ease-out;

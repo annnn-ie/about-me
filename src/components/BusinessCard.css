@@ -11,13 +11,31 @@
     position: relative;
     box-sizing: border-box;
     padding: clamp(20px, 4vw, 40px);
+    min-height: 200px; /* Ensure minimum height on mobile */
+}
+
+/* Mobile-specific card fixes */
+@media (max-width: 768px) {
+    .business-card {
+        min-height: 180px;
+        padding: 16px;
+        font-family: 'Funnel Sans', sans-serif; /* Keep Funnel Sans for business card */
+    }
 }
 
 .business-card-front {
     background: #fafafa; /* neutral-50 */
     color: #262626; /* neutral-800 */
     justify-content: space-between;
-    filter: url(#filter0_ddddg_166_4226);
+    filter: url(#filter0_ddddg_166_4226); /* Original texture and shadow filter */
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+    .business-card-front {
+        filter: none; /* Disable complex filter on mobile */
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1); /* Match receipt shadow */
+    }
 }
 
 .business-card-back {
@@ -25,7 +43,15 @@
     color: #fafafa; /* neutral-50 */
     justify-content: space-between;
     align-items: center;
-    filter: url(#filter0_ddddg_166_4226);
+    filter: url(#filter0_ddddg_166_4226); /* Original texture and shadow filter */
+}
+
+/* Mobile-specific fixes for back */
+@media (max-width: 768px) {
+    .business-card-back {
+        filter: none; /* Disable complex filter on mobile */
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1); /* Match receipt shadow */
+    }
 }
 
 
@@ -51,6 +77,17 @@
     width: 100%;
     color: #262626; /* neutral-800 */
     position: relative;
+}
+
+/* Mobile-specific name styling */
+@media (max-width: 768px) {
+    .name {
+        font-size: clamp(18px, 5vw, 24px);
+        line-height: 1.2;
+        text-align: center;
+        position: relative;
+        overflow: visible;
+    }
 }
 
 .title, .company {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './ScribbleEffect.css';
 
 const ScribbleEffect = ({ children, isFlipped }) => {
@@ -21,8 +21,8 @@ const ScribbleEffect = ({ children, isFlipped }) => {
         '/scribbles/smile.svg'
     ];
     
-    const loadRandomScribble = () => {
-        console.log('🔄 Loading new scribble, isFlipped:', isFlipped, 'at:', new Date().toISOString());
+    const loadRandomScribble = useCallback(() => {
+        console.log('🔄 Loading new scribble at:', new Date().toISOString());
         // Randomly select a scribble
         const randomIndex = Math.floor(Math.random() * scribblePaths.length);
         const selectedPath = scribblePaths[randomIndex];
@@ -43,7 +43,8 @@ const ScribbleEffect = ({ children, isFlipped }) => {
                     processedSvg = svgText
                         .replace(/<path /g, '<path class="animated-path" ')
                         .replace(/<circle /g, '<circle class="animated-path" ')
-                        .replace(/<g /g, '<g class="scribble-group" ');
+                        .replace(/<g /g, '<g class="scribble-group" ')
+                        .replace(/<svg /, '<svg data-scribble="smile" ');
                 } else {
                     // For regular scribbles, convert fill to stroke for animation
                     processedSvg = svgText
@@ -58,13 +59,15 @@ const ScribbleEffect = ({ children, isFlipped }) => {
                 console.error('Error loading SVG:', error);
                 setSvgContent(svgText);
             });
-    };
+    }, []); // Remove isFlipped dependency to prevent double loading
 
     useEffect(() => {
         console.log('🚀 Component mounted, loading initial scribble, ID:', componentId);
         // Load initial scribble on component mount, but don't show it yet
         loadRandomScribble();
-    }, [componentId]);
+        // Ensure it starts hidden
+        setIsVisible(false);
+    }, [componentId, loadRandomScribble]);
 
     // Set initial visibility based on isFlipped state (only on mount)
     useEffect(() => {
@@ -82,15 +85,17 @@ const ScribbleEffect = ({ children, isFlipped }) => {
             console.log('🔄 Flipping to back, hiding scribble immediately');
             setIsVisible(false);
         } else if (isFlipped === false) {
-            // When flipping back to front, show new scribble after flip completes
-            console.log('✅ Flipping back to front, will show new scribble after flip completes');
-            // Wait for flip animation to complete, then show new scribble
+            // When flipping back to front, load new scribble first, then show after delay
+            console.log('✅ Flipping back to front, loading new scribble');
+            // Load new scribble immediately but keep it hidden
+            loadRandomScribble();
+            // Wait for flip animation to complete, then show the new scribble
             setTimeout(() => {
-                loadRandomScribble();
+                console.log('✅ Showing new scribble after flip completes');
                 setIsVisible(true);
-            }, 300); // Reduced delay for faster new scribble
+            }, 600); // Restore original delay for proper animation timing
         }
-    }, [isFlipped]);
+    }, [isFlipped, loadRandomScribble]);
 
     if (!selectedScribble || !svgContent) {
         return <span>{children}</span>;
@@ -103,11 +108,11 @@ const ScribbleEffect = ({ children, isFlipped }) => {
                 className="scribble-container"
                 style={{
                     position: 'absolute',
-                    top: isSmile ? '-15px' : '-2px',
-                    left: isSmile ? '-75px' : '-10px',
+                    top: isSmile ? '-5px' : '-2px',
+                    left: isSmile ? '-50px' : '-10px',
                     width: '100%',
                     height: 'auto',
-                    maxWidth: isSmile ? '80px' : '120px',
+                    maxWidth: isSmile ? '56px' : '120px',
                     pointerEvents: 'none',
                     zIndex: 1,
                     opacity: isVisible ? 1 : 0

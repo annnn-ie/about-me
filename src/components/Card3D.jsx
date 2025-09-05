@@ -137,6 +137,8 @@ export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: ext
                 transformStyle: "preserve-3d",
                 width: "min(520px, 90vw)",
                 height: "min(360px, calc(90vw * 9/13))",
+                minWidth: "280px", // Ensure minimum width on mobile
+                minHeight: "200px", // Ensure minimum height on mobile
                 maxWidth: "520px",
                 maxHeight: "360px",
                 cursor: isDragging ? "grabbing" : "pointer",
