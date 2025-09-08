@@ -101,6 +101,9 @@ export function Card3D({ frontContent, backContent, onFlipChange, isFlipped: ext
         setIsDragging(false);
         scale.set(1);
         setShouldReset(true);
+        // Reset position to center
+        x.set(0);
+        y.set(0);
         // Reset tilt
         rotateX.set(0);
         rotateY.set(0);

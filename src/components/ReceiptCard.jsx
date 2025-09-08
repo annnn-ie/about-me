@@ -22,7 +22,18 @@ export function ReceiptCard({ content, ...props }) {
     const [isDragging, setIsDragging] = useState(false);
     const [shouldReset, setShouldReset] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const ref = useRef(null);
+
+    // Check if mobile on mount
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Calculate dimensions with 9:16 aspect ratio
     const cardDimensions = {
@@ -31,6 +42,16 @@ export function ReceiptCard({ content, ...props }) {
         minHeight: "min(360px, calc(90vw * 9/13))",
         maxWidth: "340px", // Updated max width as requested
         maxHeight: "360px",
+        padding: "0"
+    };
+
+    // Mobile-specific dimensions for better ratio
+    const mobileCardDimensions = {
+        width: "min(360px, calc(95vw * 9/16))", // Wider for mobile
+        height: "min(380px, calc(95vw * 9/13))", // Adjusted height
+        minHeight: "min(380px, calc(95vw * 9/13))",
+        maxWidth: "360px",
+        maxHeight: "380px",
         padding: "0"
     };
 
@@ -139,11 +160,11 @@ export function ReceiptCard({ content, ...props }) {
             style={{
                 perspective: "1100px",
                 transformStyle: "preserve-3d",
-                width: cardDimensions.width,
-                height: cardDimensions.height,
-                maxWidth: cardDimensions.maxWidth,
-                maxHeight: cardDimensions.maxHeight,
-                padding: cardDimensions.padding,
+                width: isMobile ? mobileCardDimensions.width : cardDimensions.width,
+                height: isMobile ? mobileCardDimensions.height : cardDimensions.height,
+                maxWidth: isMobile ? mobileCardDimensions.maxWidth : cardDimensions.maxWidth,
+                maxHeight: isMobile ? mobileCardDimensions.maxHeight : cardDimensions.maxHeight,
+                padding: isMobile ? mobileCardDimensions.padding : cardDimensions.padding,
                 cursor: isDragging ? "grabbing" : "pointer",
                 filter: "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.08))",
                 overflow: "visible",
@@ -164,6 +185,7 @@ export function ReceiptCard({ content, ...props }) {
                 }}
             >
                 <div
+                    className="receipt-container"
                     style={{
                         width: "100%",
                         height: "100%", // Full height for proper tilt calculation

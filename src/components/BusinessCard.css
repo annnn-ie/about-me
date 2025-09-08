@@ -15,10 +15,10 @@
 }
 
 /* Mobile-specific card fixes */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .business-card {
         min-height: 180px;
-        padding: 16px;
+        padding: 24px;
         font-family: 'Funnel Sans', sans-serif; /* Keep Funnel Sans for business card */
     }
 }
@@ -31,10 +31,10 @@
 }
 
 /* Mobile-specific fixes */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .business-card-front {
-        filter: none; /* Disable complex filter on mobile */
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1); /* Match receipt shadow */
+        filter: none !important; /* Remove filter to avoid disappearing issues */
+        box-shadow: none !important; /* Remove shadow completely to eliminate banding */
     }
 }
 
@@ -47,10 +47,10 @@
 }
 
 /* Mobile-specific fixes for back */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .business-card-back {
-        filter: none; /* Disable complex filter on mobile */
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1); /* Match receipt shadow */
+        filter: none !important; /* Remove filter to avoid disappearing issues */
+        box-shadow: none !important; /* Remove shadow completely to eliminate banding */
     }
 }
 
@@ -80,7 +80,7 @@
 }
 
 /* Mobile-specific name styling */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .name {
         font-size: clamp(18px, 5vw, 24px);
         line-height: 1.2;

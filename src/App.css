@@ -23,6 +23,22 @@
   }
 }
 
+/* Mobile-specific tab optimizations to prevent banding */
+@media (max-width: 480px) {
+  .tab-container {
+    top: 1.5rem !important; /* Move tabs higher on mobile */
+  }
+  
+  .tabs-trigger:focus {
+    box-shadow: none !important; /* Remove focus shadow on mobile to prevent banding */
+  }
+  
+  .toggle-button {
+    box-shadow: none !important; /* Remove button shadow on mobile to prevent banding */
+    backdrop-filter: none !important; /* Remove backdrop filter on mobile */
+  }
+}
+
 .app::before {
   content: '';
   position: fixed;
@@ -54,7 +70,7 @@
 
 .tab-container {
   position: fixed;
-  top: 2rem;
+  top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;

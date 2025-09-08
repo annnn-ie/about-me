@@ -20,6 +20,54 @@
   filter: url(#receipt-shadow-only); /* Shadow only, no texture */
 }
 
+/* Mobile-specific receipt optimizations */
+@media (max-width: 480px) {
+  .receipt {
+    width: 140%;
+    max-width: 400px;
+    padding: 48px 32px;
+    border-radius: 6px;
+    filter: none !important; /* Disable complex filter on mobile */
+    box-shadow: none !important; /* Remove shadow completely to eliminate banding */
+    position: absolute !important; /* Keep absolute positioning for centering */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) translate3d(0,0,0) !important; /* Keep centering transform with 3D to prevent banding */
+    will-change: auto !important; /* Prevent GPU acceleration that causes banding */
+  }
+  
+  .receipt-content {
+    gap: 20px !important; /* Reduced gap for tighter spacing on mobile */
+    filter: blur(0.5px) url(#ink-bleed-filter) !important; /* Re-enable text filter to test performance */
+  }
+  
+  /* Ensure the receipt container centers the receipt on mobile */
+  .receipt-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    will-change: auto !important; /* Prevent GPU acceleration that causes banding */
+  }
+  
+  .receipt-title {
+    font-size: clamp(12px, 2vw, 18px) !important; /* Larger font for mobile */
+  }
+  
+  .receipt-divider {
+    font-size: clamp(12px, 2vw, 18px) !important; /* Larger font for mobile */
+  }
+  
+  .receipt-section {
+    font-size: clamp(12px, 2vw, 18px) !important; /* Larger font for mobile */
+  }
+  
+  .receipt-item {
+    font-size: 16px !important; /* Increased font size for mobile */
+  }
+}
+
 .receipt-content {
   width: 100%;
   height: auto;
@@ -29,7 +77,7 @@
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  filter: blur(0.5px) url(#ink-bleed-filter); /* Reduced blur for better readability */
+  filter: blur(0.6px) url(#ink-bleed-filter); /* Reduced blur for better readability */
 }
 
 .receipt-title {

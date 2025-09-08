@@ -12,26 +12,26 @@
     }
     
     .scribble-container svg {
-        width: 105%;
+        width: 115.5%; /* Increased by 10% from 105% */
         height: auto;
-        max-width: 210px;
+        max-width: 231px; /* Increased by 10% from 210px */
         position: relative;
     }
     
-    /* Specific scaling for smiley - smaller and better positioned */
+    /* Specific scaling for smiley - increased by 10% */
     .scribble-container svg[data-scribble="smile"] {
-        width: 56px;
-        height: 56px;
-        max-width: 56px;
-        max-height: 56px;
+        width: 61.6px; /* Increased by 10% from 56px */
+        height: 61.6px; /* Increased by 10% from 56px */
+        max-width: 61.6px; /* Increased by 10% from 56px */
+        max-height: 61.6px; /* Increased by 10% from 56px */
     }
     
-    /* Mobile-specific smiley scaling only */
+    /* Mobile-specific smiley scaling only - increased by 10% */
     .scribble-container svg[data-scribble="smile"] {
-        width: 56px;
-        height: 56px;
-        max-width: 56px;
-        max-height: 56px;
+        width: 61.6px; /* Increased by 10% from 56px */
+        height: 61.6px; /* Increased by 10% from 56px */
+        max-width: 61.6px; /* Increased by 10% from 56px */
+        max-height: 61.6px; /* Increased by 10% from 56px */
     }
 }
 
