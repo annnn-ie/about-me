@@ -17,7 +17,7 @@ function App() {
   
   const tabs = [
     { id: "about", label: "About" },
-    { id: "resume", label: "Resume" },
+    { id: "resume", label: "Experience" },
   ];
   
 

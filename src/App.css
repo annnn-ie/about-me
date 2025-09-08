@@ -70,7 +70,7 @@
 
 .tab-container {
   position: fixed;
-  top: 1.5rem;
+  top: 2.5rem; /* Lowered tabs on desktop */
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
