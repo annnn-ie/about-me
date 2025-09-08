@@ -176,7 +176,8 @@ function App() {
               zIndex: 20,
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              gap: '1rem'
             }}
             initial={{ opacity: 0, y: 20, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}

@@ -108,7 +108,7 @@ const ScribbleEffect = ({ children, isFlipped }) => {
                 className="scribble-container"
                 style={{
                     position: 'absolute',
-                    top: isSmile ? '-5px' : (window.innerWidth <= 480 ? '0px' : '-5px'), // Slightly down on mobile
+                    top: isSmile ? '-3px' : (window.innerWidth <= 480 ? '2px' : '-3px'), // Lowered by 2px
                     left: isSmile ? '-50px' : (window.innerWidth <= 480 ? '0px' : '-10px'), // Slightly right on mobile
                     width: '100%',
                     height: 'auto',
