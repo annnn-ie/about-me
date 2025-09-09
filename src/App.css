@@ -23,6 +23,19 @@
   }
 }
 
+/* Safari-specific fixes */
+@supports not (backdrop-filter: blur(10px)) {
+  .toggle-button {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: none !important;
+  }
+  
+  .instructions {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: none !important;
+  }
+}
+
 /* Mobile-specific tab optimizations to prevent banding */
 @media (max-width: 480px) {
   .tab-container {

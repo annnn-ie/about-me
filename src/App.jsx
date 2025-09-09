@@ -66,7 +66,7 @@ function App() {
   // Animation variants for slide transitions
   const slideVariants = {
     enter: {
-      x: window.innerWidth <= 480 ? 360 : 1100, // Shorter distance on mobile
+      x: (typeof window !== 'undefined' && window.innerWidth <= 480) ? 360 : 1100, // Shorter distance on mobile
       opacity: 1,
     },
     center: {
@@ -74,7 +74,7 @@ function App() {
       opacity: 1,
     },
     exit: {
-      x: window.innerWidth <= 480 ? -360 : -1100, // Shorter distance on mobile
+      x: (typeof window !== 'undefined' && window.innerWidth <= 480) ? -360 : -1100, // Shorter distance on mobile
       opacity: 1,
     },
   };
@@ -82,7 +82,7 @@ function App() {
   // Animation variants for first load (top-to-center)
   const firstLoadVariants = {
     enter: {
-      y: window.innerWidth <= 480 ? -400 : -1100, // Shorter distance on mobile
+      y: (typeof window !== 'undefined' && window.innerWidth <= 480) ? -400 : -1100, // Shorter distance on mobile
       opacity: 0,
     },
     center: {
@@ -90,7 +90,7 @@ function App() {
       opacity: 1,
     },
     exit: {
-      y: window.innerWidth <= 480 ? -400 : -1100, // Shorter distance on mobile
+      y: (typeof window !== 'undefined' && window.innerWidth <= 480) ? -400 : -1100, // Shorter distance on mobile
       opacity: 0,
     },
   };

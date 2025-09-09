@@ -14,6 +14,26 @@
     min-height: 200px; /* Ensure minimum height on mobile */
 }
 
+/* Safari-specific fixes */
+@supports not (font-size: clamp(1rem, 2vw, 2rem)) {
+    .name {
+        font-size: 24px; /* Fallback for Safari */
+    }
+    
+    .title {
+        font-size: 18px; /* Fallback for Safari */
+    }
+    
+    .company-link, .social-link, .location {
+        font-size: 18px; /* Fallback for Safari */
+    }
+    
+    .symbol-svg {
+        width: 113px; /* Fallback for Safari */
+        height: 48px; /* Fallback for Safari */
+    }
+}
+
 /* Mobile-specific card fixes */
 @media (max-width: 480px) {
     .business-card {

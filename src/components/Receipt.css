@@ -20,6 +20,25 @@
   filter: url(#receipt-shadow-only); /* Shadow only, no texture */
 }
 
+/* Safari-specific fixes */
+@supports not (font-size: clamp(1rem, 2vw, 2rem)) {
+  .receipt-title {
+    font-size: 15px; /* Fallback for Safari */
+  }
+  
+  .receipt-divider {
+    font-size: 15px; /* Fallback for Safari */
+  }
+  
+  .receipt-section {
+    font-size: 15px; /* Fallback for Safari */
+  }
+  
+  .receipt-item {
+    font-size: 16px; /* Fallback for Safari */
+  }
+}
+
 /* Mobile-specific receipt optimizations */
 @media (max-width: 480px) {
   .receipt {
